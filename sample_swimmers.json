@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Micah Lau",
+        "age": 21,
+        "group": "HP"
+    },
+    {
+        "name": "Brodie Young",
+        "age": 21,
+        "group": "HP"
+    },
+    {
+        "name": "Amar Fejzic",
+        "age": 22,
+        "group": "HP"
+    },
+    {
+        "name": "Eva Wen",
+        "age": 16,
+        "group": "AGD"
+    },
+    {
+        "name": "Cassidy Gray",
+        "age": 17,
+        "group": "AGD"
+    },
+    {
+        "name": "Peter Huang",
+        "age": 15,
+        "group": "AGD"
+    },
+    {
+        "name": "Justin Jung",
+        "age": 12,
+        "group": "Regional"
+    },
+    {
+        "name": "Paul Orogo",
+        "age": 12,
+        "group": "Regional"
+    }
+]

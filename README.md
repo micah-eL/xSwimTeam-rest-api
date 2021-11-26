@@ -3,10 +3,9 @@
 
 Install:
 - Node and npm
-- MongoDB
+- MongoDB (add a "swimmers" and a "coaches" collection, sample swimmer data can be found in the root directory)
 - Postman (optional)
-
-Install project dependencies using the package.json.
+- Project dependencies using the package.json
 
 
 Setup:
