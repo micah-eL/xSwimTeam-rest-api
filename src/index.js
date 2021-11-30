@@ -35,6 +35,8 @@ app.use("/api", [logger, authorize]);
 // Import and setup routes
 const swimmer_routes = require("./routes/v1/swimmers/swimmers");
 const coach_routes = require("./routes/v1/coaches/coaches");
+const event_routes = require("./routes/v1/events/events")
 
 app.use("/api/v1/swimmers", swimmer_routes);
 app.use("/api/v1/coaches", coach_routes);
+app.use("/api/v1/events", event_routes);
