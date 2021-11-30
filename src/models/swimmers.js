@@ -6,8 +6,8 @@ const swimmerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    age: {
-        type: Number,
+    birthdate: {
+        type: Date,
         required: true
     },
     group: {
