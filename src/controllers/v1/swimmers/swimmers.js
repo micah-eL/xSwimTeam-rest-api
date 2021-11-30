@@ -55,8 +55,8 @@ const updateSwimmer = async (req, res) => {
         if (req.body.name != null) {
             queriedSwimmer.name = req.body.name;
         }
-        if (req.body.age != null) {
-            queriedSwimmer.age = req.body.age;
+        if (req.body.birthdate != null) {
+            queriedSwimmer.birthdate = req.body.birthdate;
         };
         if (req.body.group != null) {
             queriedSwimmer.group = req.body.group;

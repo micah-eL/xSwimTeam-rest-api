@@ -55,8 +55,8 @@ const updateCoach = async (req, res) => {
         if (req.body.name != null) {
             queriedCoach.name = req.body.name;
         }
-        if (req.body.age != null) {
-            queriedCoach.age = req.body.age;
+        if (req.body.birthdate != null) {
+            queriedCoach.birthdate = req.body.birthdate;
         };
         if (req.body.group != null) {
             queriedCoach.group = req.body.group;
