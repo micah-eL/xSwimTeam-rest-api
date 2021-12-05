@@ -13,13 +13,13 @@ const {
 
 router.get("/", getAllUsers);
 router.get("/search", searchUsers); // ex. .../search?group=HP&limit=2
-router.get("/:coachID", getUserWithID);
+router.get("/:userID", getUserWithID);
 
 router.post("/", addUser);
 
-router.patch("/:coachID", updateUser);
+router.patch("/:userID", updateUser);
 
-router.delete("/:coachID", deleteUser);
+router.delete("/:userID", deleteUser);
 
 
 module.exports = router;
