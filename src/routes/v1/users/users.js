@@ -15,7 +15,7 @@ router.get("/", getAllUsers);
 router.get("/search", searchUsers); // ex. .../search?group=HP&limit=2
 router.get("/:userID", getUserWithID);
 
-router.post("/", addUser);
+router.post("/register", addUser);
 
 router.patch("/:userID", updateUser);
 
