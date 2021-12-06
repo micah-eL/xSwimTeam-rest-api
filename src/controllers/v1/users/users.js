@@ -57,8 +57,11 @@ const updateUser = async (req, res) => {
     const {userID} = req.params;
     try {
         const queriedUser = await User.findById(userID);
-        if (req.body.name != null) {
-            queriedUser.name = req.body.name;
+        if (req.body.lastname != null) {
+            queriedUser.lastname = req.body.lastname;
+        }
+        if (req.body.firstname != null) {
+            queriedUser.firstname = req.body.firstname;
         }
         if (req.body.role != null) {
             queriedUser.role = req.body.role;
