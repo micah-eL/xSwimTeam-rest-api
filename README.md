@@ -9,7 +9,7 @@ Install:
 
 
 Setup:
-1. Add a .env file to the root directory with the mongodb URI (MONGODB_URI), the port you want to use (API_PORT), and a random dummy token (TOKEN_KEY) 
+1. Add a .env file to the root directory with the mongodb URI (MONGODB_URI), the port you want to use (API_PORT), and a key used to sign your JWTs (TOKEN_KEY) 
 2. Start the MongoDB process ("sudo systemctl start mongod")
 3. cd into src/ then run "npm start"
 
