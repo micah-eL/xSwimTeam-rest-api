@@ -1,7 +1,8 @@
 // Instantiate and setup Express app
+require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const PORT = process.env.API_PORT;
 app.use(express.json());
 app.set("json spaces", 2);
 app.use(express.static(__dirname + "/public")); // index.html is sent by default
@@ -9,7 +10,7 @@ app.use(express.static(__dirname + "/public")); // index.html is sent by default
 
 // Start server once connected to database
 const mongoose = require("mongoose");
-const dbURI = "mongodb://localhost:27017/x_swim_team_db";
+const dbURI = process.env.MONGODB_URI;
 getConnection = async () => {
     try {
         await mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true});
