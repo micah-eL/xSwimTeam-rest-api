@@ -1,3 +1,6 @@
+var bcrypt = require("bcryptjs");
+var jwt = require("jsonwebtoken");
+
 let {User} = require("../../../models/main");
 
 
@@ -44,10 +47,56 @@ const getUserWithID = async (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    const newUser = new User(req.body);
     try {
-        const addedUser = await newUser.save();
-        res.status(201).json({status: "success", data: addedUser});
+        const {firstname, lastname, email, password, role, birthdate, group} = req.body;
+        
+        const oldUser = await User.findOne({email});
+        if (oldUser) {
+            return res.status(409).json({status: "fail", data: "User already exists."});
+        }
+        
+        encryptedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.create({
+            lastname,
+            firstname,
+            email: email.toLowerCase(),
+            password: encryptedPassword,
+            role,
+            birthdate,
+            group
+        });
+        const authtoken = jwt.sign({
+            userID: newUser._id, email
+        },
+        process.env.TOKEN_KEY, {
+            expiresIn: "2h"
+        });
+        newUser.authtoken = authtoken;
+        res.status(201).json({status: "success", data: newUser});
+    } catch(err) {
+        res.status(400).json({status: "fail", data: err.message});
+    }
+};
+
+const loginUser = async (req, res) => {
+    try {
+        const {email, password} = req.body;
+        if (!(email && password)) {
+            res.status(400).json({status: "fail", data: "Email and password required."});
+        }
+        
+        const user = await User.findOne({email});
+        if (user && (await bcrypt.compare(password, user.password))) {
+            const authtoken = jwt.sign({
+                userID: user._id, email
+            },
+            process.env.TOKEN_KEY, {
+                expiresIn: "2h"
+            });
+            user.authtoken = authtoken;
+        }
+        
+        res.status(201).json({status: "success", data: user});
     } catch(err) {
         res.status(400).json({status: "fail", data: err.message});
     }
@@ -95,6 +144,7 @@ module.exports = {
     searchUsers,
     getUserWithID,
     addUser,
+    loginUser,
     updateUser,
     deleteUser
 };
