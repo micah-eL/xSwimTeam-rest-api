@@ -3,7 +3,7 @@
 
 Install:
 - Node and npm
-- MongoDB (add a "swimmers" and a "coaches" collection, sample swimmer data can be found in the root directory)
+- MongoDB (collections are generated automatically by mongoose, sample swimmer data can be found in the root directory)
 - Postman (optional)
 - Project dependencies using the package.json
 
