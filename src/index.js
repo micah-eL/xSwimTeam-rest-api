@@ -30,16 +30,18 @@ getConnection();
 const logger = require("./middleware/logger");
 const authorize = require("./middleware/authorize");
 
-app.use("/api", [logger, authorize]);
+app.use("/api", [logger]);
 
 
 // Import and setup routes
+const login_routes = require("./routes/v1/login/login");
 const user_routes = require("./routes/v1/users/users");
 const swimmer_routes = require("./routes/v1/swimmers/swimmers");
 const coach_routes = require("./routes/v1/coaches/coaches");
 const event_routes = require("./routes/v1/events/events")
 
-app.use("/api/v1/users", user_routes);
+app.use("/api/v1/login", login_routes);
+app.use("/api/v1/users", authorize, user_routes);
 app.use("/api/v1/swimmers", swimmer_routes);
 app.use("/api/v1/coaches", coach_routes);
-app.use("/api/v1/events", event_routes);
+app.use("/api/v1/events", authorize, event_routes);
