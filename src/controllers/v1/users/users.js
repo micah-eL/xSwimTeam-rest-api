@@ -1,7 +1,7 @@
 var bcrypt = require("bcryptjs");
 var jwt = require("jsonwebtoken");
 
-let {User} = require("../../../models/main");
+let {User, Group} = require("../../../models/main");
 
 
 const getAllUsers = async (req, res) => {
@@ -49,10 +49,15 @@ const getUserWithID = async (req, res) => {
 const addUser = async (req, res) => {
     try {
         const {firstname, lastname, email, password, role, birthdate, group} = req.body;
-        
+
         const oldUser = await User.findOne({email});
         if (oldUser) {
             return res.status(409).json({status: "fail", data: "User already exists."});
+        }
+
+        const groupExists = await Group.findOne({name: group});
+        if (!groupExists) {
+            return res.status(400).json({status: "fail", data: `Group '${group}' does not exist.`});
         }
         
         encryptedPassword = await bcrypt.hash(password, 10);
@@ -82,7 +87,7 @@ const loginUser = async (req, res) => {
     try {
         const {email, password} = req.body;
         if (!(email && password)) {
-            res.status(400).json({status: "fail", data: "Email and password required."});
+            return res.status(400).json({status: "fail", data: "Email and password required."});
         }
         
         const user = await User.findOne({email});
@@ -119,7 +124,12 @@ const updateUser = async (req, res) => {
             queriedUser.birthdate = req.body.birthdate;
         };
         if (req.body.group != null) {
-            queriedUser.group = req.body.group;
+            const groupExists = await Group.findOne({name: req.body.group});
+            if (!groupExists) {
+                return res.status(400).json({status: "fail", data: `Group '${req.body.group}' does not exist.`});
+            } else {
+                queriedUser.group = req.body.group;
+            }
         };
         const updatedUser = await queriedUser.save();
         res.status(200).json({status: "success", data: updatedUser});
