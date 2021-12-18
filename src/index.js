@@ -38,10 +38,12 @@ const login_routes = require("./routes/v1/login/login");
 const user_routes = require("./routes/v1/users/users");
 const swimmer_routes = require("./routes/v1/swimmers/swimmers");
 const coach_routes = require("./routes/v1/coaches/coaches");
-const event_routes = require("./routes/v1/events/events")
+const event_routes = require("./routes/v1/events/events");
+const group_routes = require("./routes/v1/groups/groups");
 
 app.use("/api/v1/login", login_routes);
 app.use("/api/v1/users", authorize, user_routes);
 app.use("/api/v1/swimmers", swimmer_routes);
 app.use("/api/v1/coaches", coach_routes);
 app.use("/api/v1/events", authorize, event_routes);
+app.use("/api/v1/groups", authorize, group_routes);
